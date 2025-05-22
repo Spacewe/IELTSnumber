@@ -88,13 +88,14 @@
                         <option value="liters">Liters (e.g., 3.75 L)</option>
                         <option value="phone">Phone Numbers (e.g., 07700 900123)</option>
                         <option value="time">Time (e.g., 10:30, 04:15 PM, half past 2)</option>
+                        <option value="year">Years (e.g., 1984, 2005, 752)</option>
+                        <option value="birthday">Birthdays (e.g., 18th March, July 3rd)</option>
                         <option value="postcode">Postcodes (e.g., SW1A 1AA)</option>
                         <option value="mixed">Mixed Mode <span class="mixed-mode-label">[All Types]</span></option>
                     </select>
                 </div>
 
-                <div id="digits-options" class="space-y-2">
-                     <label for="digit-count" class="block text-sm font-medium text-slate-700 mb-1">Number of Digits:</label>
+                <div id="digits-options" class="space-y-2"> <label for="digit-count" class="block text-sm font-medium text-slate-700 mb-1">Number of Digits:</label>
                      <select id="digit-count" class="mt-1 block w-full py-2 px-3 border border-slate-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm">
                         <option value="3">3 digits</option>
                         <option value="4">4 digits</option>
@@ -113,7 +114,7 @@
                     Start Training
                     <svg id="start-spinner" class="spinner ml-2 hidden" viewBox="0 0 24 24"></svg>
                 </button>
-                 <p id="voice-error" class="text-red-500 text-sm text-center hidden">Could not initialize speech synthesis. Please try a different browser or check your settings.</p>
+                 <p id="voice-error" class="text-red-500 text-sm text-center hidden">Could not initialize speech synthesis. This tool relies on your browser/OS's built-in English voices. Please ensure an English (preferably UK) voice pack is installed and enabled, especially for offline use or in restricted networks. Try a different browser if issues persist.</p>
             </div>
         </div>
 
@@ -180,28 +181,30 @@
                     <h4 class="font-semibold text-slate-800 mb-1">如何使用 (How to Use):</h4>
                     <p class="text-slate-600">
                         <strong>中文说明：</strong><br>
-                        1. <strong>选择模式：</strong> 从下拉菜单中选择您想练习的数字类型（如纯数字、货币、面积、升、电话号码、时间、邮编或混合模式）。<br>
+                        1. <strong>选择模式：</strong> 从下拉菜单中选择您想练习的数字类型（如纯数字、货币、面积、升、电话号码、时间、年份、生日、邮编或混合模式）。<br>
                         2. <strong>设置题目：</strong> 如果选择了“数字”模式，请选择数字的位数。然后设置本次练习的题目数量。<br>
                         3. <strong>开始训练：</strong> 点击“开始训练”按钮。题目会逐一通过语音播报。<br>
                         4. <strong>调整语速：</strong> 在训练界面，您可以随时通过“Playback Speed”下拉菜单调整音频播放速度。<br>
-                        5. <strong>输入答案：</strong> 在输入框中键入您听到的数字或字符。对于带有单位的题目，只需输入数字部分。<br>
+                        5. <strong>输入答案：</strong> 在输入框中键入您听到的数字或字符。对于带有单位的题目，只需输入数字部分。生日模式请输入如 "18 March"。<br>
                         6. <strong>提交答案：</strong> 按下回车键提交。系统会判断对错并给出反馈。您可以点击“重播音频”按钮再次收听当前题目。<br>
                         7. <strong>查看结果：</strong> 完成所有题目后，会显示结果汇总页面，包括您的得分、每题详情以及简单的错误分析。<br>
-                        8. <strong>再次练习：</strong> 点击“再次练习”可以返回设置页面开始新的训练。
+                        8. <strong>再次练习：</strong> 点击“再次练习”可以返回设置页面开始新的训练。<br>
+                        9. <strong>语音兼容性：</strong> 本工具依赖您浏览器/操作系统的内置英文语音功能。为确保最佳体验（尤其是在中国大陆等网络可能受限的环境下），请确保您的设备已安装并启用了英文（推荐英式英语）本地语音包。如果遇到语音问题，尝试更换浏览器或检查系统语音设置。
                     </p>
                 </section>
                 <hr class="my-3">
                 <section>
                     <p class="text-slate-600">
                         <strong>English Instructions:</strong><br>
-                        1. <strong>Select Mode:</strong> Choose the type of numbers you want to practice from the dropdown menu (e.g., Digits, Currency, Area, Liters, Phone Numbers, Time, Postcodes, or Mixed Mode).<br>
+                        1. <strong>Select Mode:</strong> Choose the type of numbers you want to practice from the dropdown menu (e.g., Digits, Currency, Area, Liters, Phone Numbers, Time, Years, Birthdays, Postcodes, or Mixed Mode).<br>
                         2. <strong>Set Questions:</strong> If "Digits" mode is selected, choose the number of digits. Then, set the total number of questions for this session.<br>
                         3. <strong>Start Training:</strong> Click the "Start Training" button. Questions will be read out one by one.<br>
                         4. <strong>Adjust Speed:</strong> During training, you can adjust the audio playback speed at any time using the "Playback Speed" dropdown menu in the training interface.<br>
-                        5. <strong>Enter Answer:</strong> Type the numbers or characters you hear into the input box. For questions with units, only enter the numerical value.<br>
+                        5. <strong>Enter Answer:</strong> Type the numbers or characters you hear into the input box. For questions with units, only enter the numerical value. For Birthdays, enter like "18 March".<br>
                         6. <strong>Submit Answer:</strong> Press Enter to submit. The system will provide feedback on whether your answer is correct or incorrect. You can click the "Replay Audio" button to listen to the current question again.<br>
                         7. <strong>View Results:</strong> After completing all questions, a results page will be displayed, showing your score, details for each question, and a simple error analysis.<br>
-                        8. <strong>Practice Again:</strong> Click "Practice Again" to return to the setup page and start a new training session.
+                        8. <strong>Practice Again:</strong> Click "Practice Again" to return to the setup page and start a new training session.<br>
+                        9. <strong>Voice Compatibility:</strong> This tool relies on your browser/OS's built-in English speech capabilities. For the best experience (especially in environments with potential network restrictions like mainland China), please ensure an English (preferably UK English) local voice pack is installed and enabled on your device. If you encounter voice issues, try a different browser or check your system's speech settings.
                     </p>
                 </section>
             </div>
@@ -255,24 +258,42 @@
         let questions = [];
         let currentQuestionIndex = 0;
         let userAnswers = [];
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 
         function populateVoiceList() {
-            voices = synth.getVoices().filter(voice => voice.lang.startsWith('en'));
-            const ukFemaleVoice = voices.find(voice => voice.lang === 'en-GB' && voice.name.toLowerCase().includes('female'));
-            const ukVoice = voices.find(voice => voice.lang === 'en-GB');
+            voices = synth.getVoices(); 
             
-            if (ukFemaleVoice) defaultVoice = ukFemaleVoice;
-            else if (ukVoice) defaultVoice = ukVoice;
-            else if (voices.length > 0) defaultVoice = voices[0];
-            else defaultVoice = null;
+            let preferredVoices = [];
+            preferredVoices.push(...voices.filter(voice => voice.lang === 'en-GB' && voice.localService && voice.name.toLowerCase().includes('female')));
+            preferredVoices.push(...voices.filter(voice => voice.lang === 'en-GB' && voice.localService && !voice.name.toLowerCase().includes('female')));
+            preferredVoices.push(...voices.filter(voice => voice.lang === 'en-GB' && !voice.localService && voice.name.toLowerCase().includes('female')));
+            preferredVoices.push(...voices.filter(voice => voice.lang === 'en-GB' && !voice.localService && !voice.name.toLowerCase().includes('female')));
+            
+            if (preferredVoices.length === 0) {
+                preferredVoices.push(...voices.filter(voice => voice.lang === 'en-US' && voice.localService && voice.name.toLowerCase().includes('female')));
+                preferredVoices.push(...voices.filter(voice => voice.lang === 'en-US' && voice.localService && !voice.name.toLowerCase().includes('female')));
+                preferredVoices.push(...voices.filter(voice => voice.lang === 'en-US' && !voice.localService && voice.name.toLowerCase().includes('female')));
+                preferredVoices.push(...voices.filter(voice => voice.lang === 'en-US' && !voice.localService && !voice.name.toLowerCase().includes('female')));
+            }
 
-            if (!defaultVoice && synth.getVoices().length > 0) { 
-                 defaultVoice = synth.getVoices()[0];
+            if (preferredVoices.length === 0) {
+                preferredVoices.push(...voices.filter(voice => voice.lang.startsWith('en-') && voice.localService));
+                preferredVoices.push(...voices.filter(voice => voice.lang.startsWith('en-')));
+            }
+            
+            const uniquePreferredVoices = [...new Set(preferredVoices)];
+
+            if (uniquePreferredVoices.length > 0) {
+                defaultVoice = uniquePreferredVoices[0]; 
+                console.log("Selected voice:", defaultVoice.name, defaultVoice.lang, "Local:", defaultVoice.localService);
+            } else {
+                defaultVoice = null; 
             }
             
             if (!defaultVoice) {
-                console.warn("No suitable speech synthesis voice found.");
-                voiceError.textContent = "Could not initialize speech synthesis. Please try a different browser or check your OS settings.";
+                console.warn("No suitable English speech synthesis voice found after prioritization.");
+                voiceError.innerHTML = "Could not initialize speech synthesis. This tool relies on your browser/OS's built-in English voices. <br>Please ensure an English (preferably UK) voice pack is installed and enabled, especially for offline use or in restricted networks. Try a different browser if issues persist. <br>(无法初始化语音合成。本工具依赖您浏览器/操作系统的内置英文语音。请确保已安装并启用英文（推荐英式）本地语音包，尤其是在离线或网络受限环境下。若问题持续，请尝试更换浏览器。)";
                 voiceError.classList.remove('hidden');
                 startButton.disabled = true;
                 startButton.classList.add('opacity-50', 'cursor-not-allowed');
@@ -286,7 +307,7 @@
         if (synth.onvoiceschanged !== undefined) {
             synth.onvoiceschanged = populateVoiceList;
         }
-        populateVoiceList(); 
+        setTimeout(populateVoiceList, 100); 
 
 
         // Event Listeners
@@ -294,7 +315,7 @@
             const isDigitsMode = modeSelect.value === 'digits';
             digitsOptions.classList.toggle('hidden', !isDigitsMode);
         });
-        modeSelect.dispatchEvent(new Event('change')); // Initialize visibility
+        modeSelect.dispatchEvent(new Event('change')); 
 
 
         startButton.addEventListener('click', startTraining);
@@ -309,7 +330,6 @@
             setupSection.classList.remove('hidden');
             answerInput.value = '';
             feedbackArea.textContent = '';
-             // Reset digits options visibility based on current mode select value
             modeSelect.dispatchEvent(new Event('change'));
         });
 
@@ -326,7 +346,7 @@
 
         function speakText(text, callback) {
             if (!synth || !defaultVoice) {
-                feedbackArea.textContent = "Speech synthesis not available.";
+                feedbackArea.textContent = "Speech synthesis not available or no suitable voice found.";
                 feedbackArea.className = 'feedback-message text-red-500';
                 if (callback) callback(); 
                 return;
@@ -345,7 +365,7 @@
             };
             currentUtterance.onerror = (event) => {
                 console.error('SpeechSynthesisUtterance.onerror', event);
-                feedbackArea.textContent = `Speech error: ${event.error}`;
+                feedbackArea.textContent = `Speech error: ${event.error}. If this persists, try a different browser or check your system's voice settings.`;
                 feedbackArea.className = 'feedback-message text-red-500';
                 answerInput.focus();
                  if (callback) callback();
@@ -360,7 +380,61 @@
                 speakText(textToReplay);
             }
         }
+
+        function getOrdinalSuffix(day) {
+            if (day > 3 && day < 21) return 'th';
+            switch (day % 10) {
+                case 1: return "st";
+                case 2: return "nd";
+                case 3: return "rd";
+                default: return "th";
+            }
+        }
         
+        function getSpokenYear(year) {
+            const y = parseInt(year);
+            if (isNaN(y)) return year.toString(); // Should not happen if input is number
+
+            if (y < 1000) { // e.g. 752 -> "seven hundred and fifty-two" or "seven fifty-two"
+                if (y % 100 === 0) return `${getSpokenNumber(Math.floor(y/100))} hundred`; // 700 -> "seven hundred"
+                const hundreds = Math.floor(y/100);
+                const remainder = y % 100;
+                let spoken = "";
+                if (hundreds > 0) spoken += `${getSpokenNumber(hundreds)} hundred and `;
+                spoken += getSpokenNumber(remainder);
+                return spoken;
+            } else if (y >= 1000 && y < 2000) { // e.g. 1984 -> "nineteen eighty-four"
+                const firstTwo = Math.floor(y / 100);
+                const lastTwo = y % 100;
+                if (lastTwo === 0) { // 1900 -> "nineteen hundred"
+                    return `${getSpokenNumber(firstTwo)} hundred`;
+                }
+                return `${getSpokenNumber(firstTwo)} ${getSpokenNumber(lastTwo)}`;
+            } else if (y >= 2000 && y < 2100) { // e.g. 2005 -> "two thousand and five", 2023 -> "twenty twenty-three" or "two thousand and twenty-three"
+                if (y % 100 === 0) return `${getSpokenNumber(Math.floor(y/1000))} thousand`; // 2000 -> "two thousand"
+                if (y % 100 < 10 && y % 100 !== 0) return `${getSpokenNumber(Math.floor(y/1000))} thousand and ${getSpokenNumber(y%100)}`; // 2005 -> "two thousand and five"
+                // For 2010-2099, can say "twenty ten" or "two thousand and ten"
+                // To keep it simple, let's do "two thousand and X" for 2001-2009, and "twenty XX" for 2010+
+                if (y > 2009) {
+                     return `${getSpokenNumber(Math.floor(y/100))} ${getSpokenNumber(y%100)}`; // "twenty twenty-three"
+                }
+                return `${getSpokenNumber(Math.floor(y/1000))} thousand and ${getSpokenNumber(y%100)}`;
+            }
+            return year.toString(); // Fallback for very old or future years not fitting common patterns
+        }
+
+        function getSpokenNumber(n) { // Helper for getSpokenYear, handles numbers up to 99
+            if (n < 0 || n > 99) return n.toString(); // Basic guard
+            const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+            const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+            if (n < 20) return ones[n];
+            const ten = Math.floor(n / 10);
+            const one = n % 10;
+            return tens[ten] + (one > 0 ? `-${ones[one]}` : ""); // e.g. "twenty-three"
+        }
+
+
         function getSpokenTime(h, m) {
             let hourFor12 = h % 12;
             if (hourFor12 === 0) hourFor12 = 12; 
@@ -371,35 +445,34 @@
 
             const style = Math.random();
 
-            if (style < 0.25) { // e.g., "ten thirty AM"
+            if (style < 0.25) { 
                 let hourPart = hourFor12.toString();
                 let minutePart = m.toString().padStart(2, '0');
                 if (m === 0) minutePart = "o'clock";
-                else if (m < 10) minutePart = `oh ${m}`; // "oh five"
-                else minutePart = m.toString(); // "thirty"
+                else if (m < 10) minutePart = `oh ${m}`; 
+                else minutePart = m.toString(); 
                 
                 let spoken = `${hourPart} ${minutePart}`;
                 if (minutePart !== "o'clock") spoken += ` ${ampm}`;
-                else if (h !==0 && h !== 12) spoken += ` ${ampm}`; // 1 AM o'clock, but not midnight/midday o'clock
+                else if (h !==0 && h !== 12) spoken += ` ${ampm}`; 
                 return spoken;
-            } else if (style < 0.5) { // e.g. "five fifteen PM" (digits for minutes)
+            } else if (style < 0.5) { 
                  let hourPart = hourFor12.toString();
-                 let minutePartSpoken = m.toString().padStart(2,'0').split('').join(' '); // "one five" for 15
+                 let minutePartSpoken = m.toString().padStart(2,'0').split('').map(d => getSpokenNumber(parseInt(d))).join(' '); 
                  if (m === 0) minutePartSpoken = "o'clock";
 
                  let spoken = `${hourPart} ${minutePartSpoken}`;
                  if (minutePartSpoken !== "o'clock") spoken += ` ${ampm}`;
                  else if (h !==0 && h !== 12) spoken += ` ${ampm}`;
                  return spoken;
-            } else if (style < 0.75 || m === 0 || m === 15 || m === 30 || m === 45) { // O'clock, half past, quarter
-                if (m === 0) return `${hourFor12} o'clock` + (h !==0 && h !== 12 ? ` ${ampm}` : "");
-                if (m === 15) return `quarter past ${hourFor12}` + ` ${ampm}`;
-                if (m === 30) return `half past ${hourFor12}` + ` ${ampm}`;
-                if (m === 45) return `quarter to ${ (h + 1) % 12 || 12}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`; 
+            } else if (style < 0.75 || m === 0 || m === 15 || m === 30 || m === 45) { 
+                if (m === 0) return `${getSpokenNumber(hourFor12)} o'clock` + (h !==0 && h !== 12 ? ` ${ampm}` : "");
+                if (m === 15) return `quarter past ${getSpokenNumber(hourFor12)}` + ` ${ampm}`;
+                if (m === 30) return `half past ${getSpokenNumber(hourFor12)}` + ` ${ampm}`;
+                if (m === 45) return `quarter to ${getSpokenNumber((h + 1) % 12 || 12)}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`; 
             } 
-            // Default: Minutes past/to
-            if (m < 30) return `${m} minutes past ${hourFor12}` + ` ${ampm}`;
-            return `${60 - m} minutes to ${(h + 1) % 12 || 12}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`;
+            if (m < 30) return `${getSpokenNumber(m)} minutes past ${getSpokenNumber(hourFor12)}` + ` ${ampm}`;
+            return `${getSpokenNumber(60 - m)} minutes to ${getSpokenNumber((h + 1) % 12 || 12)}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`;
         }
 
         function getRandomLetter() {
@@ -413,7 +486,7 @@
             const numTotalQuestions = parseInt(numQuestionsInput.value);
             const overallMode = modeSelect.value;
             
-            const availableModesForMixed = ['digits', 'currency', 'area', 'liters', 'phone', 'time', 'postcode'];
+            const availableModesForMixed = ['digits', 'currency', 'area', 'liters', 'phone', 'time', 'year', 'birthday', 'postcode'];
 
             for (let i = 0; i < numTotalQuestions; i++) {
                 let currentMode = overallMode;
@@ -441,10 +514,10 @@
                         break;
                     case 'currency':
                         const currencyTypeRand = Math.random();
-                        const amount = (Math.random() * (currencyTypeRand < 0.5 ? 5000 : 200) + 1).toFixed(Math.random() > 0.3 ? 2 : 0); // Euros tend to be smaller amounts in examples
+                        const amount = (Math.random() * (currencyTypeRand < 0.5 ? 5000 : 200) + 1).toFixed(Math.random() > 0.3 ? 2 : 0);
                         question.correctAnswer = amount;
 
-                        if (currencyTypeRand < 0.45) { // Pounds
+                        if (currencyTypeRand < 0.45) { 
                             question.unitPrefix = '£';
                             question.prompt = 'Enter the amount in Pounds:';
                             if (amount.includes('.')) {
@@ -453,7 +526,7 @@
                             } else {
                                 question.textToSpeak = `${amount} pounds`;
                             }
-                        } else if (currencyTypeRand < 0.9) { // Euros
+                        } else if (currencyTypeRand < 0.9) { 
                             question.unitPrefix = '€';
                             question.prompt = 'Enter the amount in Euros:';
                              if (amount.includes('.')) {
@@ -462,12 +535,12 @@
                             } else {
                                 question.textToSpeak = `${amount} euros`;
                             }
-                        } else { // Sterling (spoken as pounds, no symbol, distinct prompt)
+                        } else { 
                             question.unitPrefix = ''; 
                             question.prompt = 'Enter the amount in sterling:';
                              if (amount.includes('.')) {
                                 const parts = amount.split('.');
-                                question.textToSpeak = `${parts[0]} sterling and ${parts[1]} pence`; // or just "X sterling Y"
+                                question.textToSpeak = `${parts[0]} sterling and ${parts[1]} pence`;
                             } else {
                                 question.textToSpeak = `${amount} sterling`;
                             }
@@ -475,13 +548,13 @@
                         break;
                     case 'area':
                         const areaTypeRand = Math.random();
-                        if (areaTypeRand < 0.5) { // Hectares
+                        if (areaTypeRand < 0.5) { 
                             const hectares = (Math.random() * 100 + 0.5).toFixed(1);
                             question.textToSpeak = `${hectares} hectares`;
                             question.correctAnswer = hectares;
                             question.unitSuffix = 'ha';
                             question.prompt = 'Enter the area in hectares:';
-                        } else { // Square meters
+                        } else { 
                             const sqm = Math.floor(Math.random() * 5000 + 100);
                             question.textToSpeak = `${sqm} square meters`;
                             question.correctAnswer = sqm.toString();
@@ -524,6 +597,27 @@
                         question.textToSpeak = `The time is ${getSpokenTime(h,m)}.`;
                         question.prompt = 'Enter the time (HH:MM):';
                         break;
+                    case 'year':
+                        const randomYear = Math.floor(Math.random() * (2025 - 300 + 1)) + 300; // Range 300 to 2025
+                        question.correctAnswer = randomYear.toString();
+                        question.textToSpeak = getSpokenYear(randomYear);
+                        question.prompt = 'Enter the year:';
+                        break;
+                    case 'birthday':
+                        const day = Math.floor(Math.random() * 28) + 1; // Keep it simple, avoid month length issues for now (1-28)
+                        const monthIndex = Math.floor(Math.random() * months.length);
+                        const monthName = months[monthIndex];
+                        const ordinalDay = day + getOrdinalSuffix(day);
+                        
+                        const spokenDateStyle = Math.random();
+                        if (spokenDateStyle < 0.5) {
+                            question.textToSpeak = `the ${ordinalDay} of ${monthName}`;
+                        } else {
+                            question.textToSpeak = `${monthName} the ${ordinalDay}`;
+                        }
+                        question.correctAnswer = `${day} ${monthName}`; // e.g., "18 March"
+                        question.prompt = 'Enter the date (e.g., 5 June):';
+                        break;
                     case 'postcode':
                         const pc = `${getRandomLetter()}${getRandomLetter()}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${getRandomLetter()}${getRandomLetter()}`;
                         question.correctAnswer = pc;
@@ -536,24 +630,43 @@
         }
         
         async function startTraining() {
-            if (!defaultVoice && synth.getVoices().length > 0) { 
-                populateVoiceList();
+            if (synth.getVoices().length === 0 && synth.onvoiceschanged !== undefined) {
+                await new Promise(resolve => {
+                    const checkVoicesInterval = setInterval(() => {
+                        if (synth.getVoices().length > 0) {
+                            clearInterval(checkVoicesInterval);
+                            populateVoiceList(); 
+                            resolve();
+                        }
+                    }, 100);
+                    setTimeout(() => {
+                        clearInterval(checkVoicesInterval);
+                        if(synth.getVoices().length === 0) populateVoiceList(); 
+                        resolve();
+                    }, 2000); 
+                });
+            } else if (synth.getVoices().length === 0 && synth.onvoiceschanged === undefined) {
+                await new Promise(resolve => setTimeout(() => { populateVoiceList(); resolve(); }, 500));
+            } else if (!defaultVoice) { 
+                 populateVoiceList(); 
             }
+
             if (!defaultVoice) {
-                 voiceError.textContent = "Cannot start training: No speech synthesis voice available.";
+                 voiceError.innerHTML = "Cannot start training: No suitable English speech synthesis voice found. <br>Please check your browser/OS settings for installed English (UK) voice packs. <br>(无法开始训练：未找到合适的英文语音。请检查系统语音设置。)";
                  voiceError.classList.remove('hidden');
                  console.error("Cannot start training: No speech synthesis voice available.");
+                 startButton.disabled = false; 
+                 startSpinner.classList.add('hidden');
                  return;
             }
             voiceError.classList.add('hidden');
 
             startSpinner.classList.remove('hidden');
             startButton.disabled = true;
-
-            await new Promise(resolve => setTimeout(resolve, 200));
+            await new Promise(resolve => setTimeout(resolve, 50));
 
             generateQuestions();
-            if (questions.length === 0) {
+            if (questions.length === 0) { 
                 voiceError.textContent = "Could not generate questions. Please check settings.";
                 voiceError.classList.remove('hidden');
                 startSpinner.classList.add('hidden');
@@ -567,13 +680,11 @@
             resultsSection.classList.add('hidden');
             trainingSection.classList.remove('hidden');
             
-            // Initial visibility of digitsOptions based on the first question if in mixed mode
             if (modeSelect.value === 'mixed' && questions.length > 0) {
                  digitsOptions.classList.toggle('hidden', questions[0].type !== 'digits');
             } else {
                  digitsOptions.classList.toggle('hidden', modeSelect.value !== 'digits');
             }
-
 
             startSpinner.classList.add('hidden');
             startButton.disabled = false;
@@ -591,11 +702,12 @@
                 feedbackArea.textContent = '';
                 feedbackArea.className = 'feedback-message text-center text-lg font-medium mt-2 mb-4'; 
                 
-                // For mixed mode, ensure digit options visibility matches current question type
                 if (modeSelect.value === 'mixed') {
                     digitsOptions.classList.toggle('hidden', q.type !== 'digits');
+                } else { // For non-mixed modes, ensure it's correctly set based on the single mode
+                    digitsOptions.classList.toggle('hidden', modeSelect.value !== 'digits');
                 }
-                // For non-mixed mode, it's handled by modeSelect change listener and startTraining.
+
 
                 speakText(q.textToSpeak);
 
@@ -609,8 +721,32 @@
             if (type === 'postcode'){
                 return normalized.toUpperCase().replace(/\s/g, '');
             }
+            
             normalized = normalized.toLowerCase();
-            if (type === 'digits' || type === 'phone') {
+
+            if (type === 'birthday') {
+                // Remove ordinal suffixes (st, nd, rd, th) and extra spaces
+                normalized = normalized.replace(/(st|nd|rd|th)\b/g, '');
+                normalized = normalized.replace(/\s+/g, ' '); // Consolidate multiple spaces
+                // Attempt to match "DD MonthName" or "MonthName DD"
+                const parts = normalized.split(' ');
+                let dayPart = "", monthPart = "";
+
+                if (parts.length === 2) {
+                    if (!isNaN(parseInt(parts[0])) && months.map(m=>m.toLowerCase()).includes(parts[1])) {
+                        dayPart = parseInt(parts[0]).toString();
+                        monthPart = months.find(m => m.toLowerCase() === parts[1]);
+                    } else if (months.map(m=>m.toLowerCase()).includes(parts[0]) && !isNaN(parseInt(parts[1]))) {
+                        dayPart = parseInt(parts[1]).toString();
+                        monthPart = months.find(m => m.toLowerCase() === parts[0]);
+                    }
+                }
+                if (dayPart && monthPart) return `${dayPart} ${monthPart}`; // Standardized: "DD MonthName_Capitalized"
+                return normalized; // Fallback if parsing fails
+            }
+
+
+            if (type === 'digits' || type === 'phone' || type === 'year') {
                 return normalized.replace(/\s/g, ''); 
             }
             if (type === 'currency' || type === 'area' || type === 'liters') {
@@ -620,9 +756,9 @@
             if (type === 'time') {
                 normalized = normalized.replace(/\s/g, '');
                 if (/^\d{1,2}:\d{2}$/.test(normalized)) {
-                    const parts = normalized.split(':');
-                    const h = parts[0].padStart(2, '0');
-                    const m = parts[1].padStart(2,'0'); 
+                    const timeParts = normalized.split(':');
+                    const h = timeParts[0].padStart(2, '0');
+                    const m = timeParts[1].padStart(2,'0'); 
                     return `${h}:${m}`;
                 }
                 return normalized; 
@@ -635,7 +771,11 @@
             const userAnswerRaw = answerInput.value;
             const currentQuestion = questions[currentQuestionIndex];
             const userAnswerNormalized = normalizeAnswer(userAnswerRaw, currentQuestion.type);
-            const correctAnswerNormalized = normalizeAnswer(currentQuestion.correctAnswer, currentQuestion.type);
+            // For birthday, the correct answer is already "DD MonthName", so direct comparison after normalizing user input.
+            const correctAnswerNormalized = (currentQuestion.type === 'birthday') 
+                                            ? currentQuestion.correctAnswer // Already in "DD MonthName" format
+                                            : normalizeAnswer(currentQuestion.correctAnswer, currentQuestion.type);
+
 
             const isCorrect = userAnswerNormalized === correctAnswerNormalized;
 
@@ -695,7 +835,7 @@
             let analysisHtml = `Overall: ${correctCount}/${questions.length} correct.<br>`;
             const errorsByType = {};
             const questionsByType = {};
-            let incorrectDigitsOrChars = []; // Changed name for postcodes
+            let incorrectDigitsOrChars = [];
 
             userAnswers.forEach(ans => {
                 if (!questionsByType[ans.type]) {
@@ -708,11 +848,21 @@
                     if (!errorsByType[ans.type]) errorsByType[ans.type] = [];
                     errorsByType[ans.type].push(ans);
                     
-                    if (['digits', 'phone', 'postcode'].includes(ans.type)) { // Added postcode
-                        for(let char of ans.correctAnswer.toUpperCase()) { // Ensure correct answer is also normalized for comparison
+                    if (['digits', 'phone', 'postcode', 'year'].includes(ans.type)) { 
+                        for(let char of ans.correctAnswer.toUpperCase()) { 
                             if (!ans.userAnswer.toUpperCase().includes(char)) {
                                 incorrectDigitsOrChars.push(char);
                             }
+                        }
+                    } else if (ans.type === 'birthday') {
+                        // For birthdays, compare parts if incorrect
+                        const correctParts = ans.correctAnswer.split(' '); // "DD", "MonthName"
+                        const userParts = normalizeAnswer(ans.userAnswer, 'birthday').split(' ');
+                        if (userParts.length === 2) {
+                            if(userParts[0] !== correctParts[0]) incorrectDigitsOrChars.push(`Day: ${correctParts[0]} (yours: ${userParts[0]})`);
+                            if(userParts[1] !== correctParts[1]) incorrectDigitsOrChars.push(`Month: ${correctParts[1]} (yours: ${userParts[1]})`);
+                        } else {
+                            incorrectDigitsOrChars.push(`Format error for: ${ans.correctAnswer}`);
                         }
                     }
                 }
@@ -733,19 +883,18 @@
                 const sortedCommonlyMissedChars = Object.entries(charFrequency)
                     .sort(([,a],[,b]) => b-a)
                     .slice(0, 5) 
-                    .map(([char, count]) => `${char} (missed ${count} times)`);
+                    .map(([char, count]) => `${char}${count > 1 ? ` (x${count})` : ''}`);
 
                 if (sortedCommonlyMissedChars.length > 0) {
-                    analysisHtml += `<br><strong>Potentially difficult digits/characters:</strong> ${sortedCommonlyMissedChars.join(', ')}. (Simple analysis)`;
+                    analysisHtml += `<br><strong>Potentially difficult parts:</strong> ${sortedCommonlyMissedChars.join(', ')}. (Simple analysis)`;
                 }
             }
             
             if (correctCount === questions.length) {
                 analysisHtml = "Excellent! You got all questions correct!";
-            } else if (Object.keys(errorsByType).length === 0 && correctCount < questions.length) { // Should not happen if not all correct
+            } else if (Object.keys(errorsByType).length === 0 && correctCount < questions.length) { 
                  analysisHtml += "<br>Review your answers to see where you can improve.";
             }
-
 
             analysisText.innerHTML = analysisHtml;
         }
@@ -755,10 +904,14 @@
         
         modeSelect.dispatchEvent(new Event('change')); 
         
-        if (synth.getVoices().length === 0 && synth.onvoiceschanged === undefined) { 
-            setTimeout(populateVoiceList, 200); 
-        } else if (synth.getVoices().length > 0) {
-             populateVoiceList(); 
+        if (synth.getVoices().length === 0) {
+            if (synth.onvoiceschanged !== undefined) {
+                // Handled by onvoiceschanged
+            } else {
+                setTimeout(populateVoiceList, 500); 
+            }
+        } else {
+            populateVoiceList(); 
         }
     </script>
 </body>
