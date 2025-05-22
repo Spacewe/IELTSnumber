@@ -14,6 +14,8 @@
       * 面积 (Area: hectares, square meters)
       * 容积 (Liters)
       * 电话号码 (Phone Numbers)
+      * 年份（Years）
+      * 生日-日月（date of birth）
       * 时间 (Time: 多种口语表达方式)
       * 邮编 (Postcodes: 例如 SW1A 1AA)
       * 混合模式 (Mixed Mode: 所有类型随机出现)
