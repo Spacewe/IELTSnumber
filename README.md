@@ -1,6 +1,6 @@
 # IELTS Listening Number Practice Web App
 
-[简体中文](README-CN.md)
+[中文版README](README-CN.md)
 
 An interactive web application to help users practice number dictation for IELTS listening.
 
@@ -43,7 +43,7 @@ An interactive web application to help users practice number dictation for IELTS
 
 1.  **Download or Clone**:
       * Download the ZIP file and extract it, or use `git clone` 2.  **Open the Webpage**:
-      * Open `index.html` (or your main HTML file name) directly in your web browser.
+      * Open ` .html` (or your main HTML file name) directly in your web browser.
 2.  **Start Practicing**:
       * **Select Mode**: Choose the type of numbers you want to practice from the dropdown menu.
       * **Set Questions**: Configure the number of questions and digits (if applicable for "Digits" mode).
@@ -67,7 +67,7 @@ An interactive web application to help users practice number dictation for IELTS
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE). ---
+This project is licensed under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 
