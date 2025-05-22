@@ -41,10 +41,12 @@ An interactive web application to help users practice number dictation for IELTS
 
 ## 🚀 How to Use
 
+
 1.  **Download or Clone**:
-      * Download the ZIP file and extract it, or use `git clone` 2.  **Open the Webpage**:
+      * Download the ZIP file and extract it, or use `git clone`
+2.  **Open the Webpage**:
       * Open ` .html` (or your main HTML file name) directly in your web browser.
-2.  **Start Practicing**:
+3.  **Start Practicing**:
       * **Select Mode**: Choose the type of numbers you want to practice from the dropdown menu.
       * **Set Questions**: Configure the number of questions and digits (if applicable for "Digits" mode).
       * **Start Training**: Click the "Start Training" button. Questions will be read out one by one.
