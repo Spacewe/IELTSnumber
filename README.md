@@ -4,7 +4,7 @@
 
 An interactive web application to help users practice number dictation for IELTS listening.
 
-[![Visits](https://profile-counter.glitch.me/cosing_IELTSlistennumber/count.svg)](https://github.com/your-username/your-repository-name) ---
+[![Visits](https://profile-counter.glitch.me/cosing_IELTSlistennumber/count.svg)](https://github.com/your-username/your-repository-name)
 
 ## 📖 Features
 
@@ -40,7 +40,7 @@ An interactive web application to help users practice number dictation for IELTS
 ## 🚀 How to Use
 
 1.  **Download or Clone**:
-      * Download the ZIP file and extract it, or use `git clone https://github.com/spacewe/IELTSnumber.git` 2.  **Open the Webpage**:
+      * Download the ZIP file and extract it, or use `git clone` 2.  **Open the Webpage**:
       * Open `index.html` (or your main HTML file name) directly in your web browser.
 2.  **Start Practicing**:
       * **Select Mode**: Choose the type of numbers you want to practice from the dropdown menu.
@@ -69,5 +69,4 @@ This project is licensed under the [MIT License](LICENSE). ---
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome\! Feel free to check the [issues page](https://github.com/your-username/your-repository-name/issues). \`\`\`
-&lt;/immersive&gt;
+Contributions, issues, and feature requests are welcome\! Feel free to check the [issues page] 
