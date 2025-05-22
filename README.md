@@ -14,6 +14,8 @@ An interactive web application to help users practice number dictation for IELTS
       * Area (hectares, square meters)
       * Liters
       * Phone Numbers
+      * years
+      * date of birth
       * Time (various spoken formats)
       * Postcodes (UK format, e.g., SW1A 1AA)
       * Mixed Mode (randomly selects from all types)
