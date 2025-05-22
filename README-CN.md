@@ -4,7 +4,7 @@
 
 一个帮助用户练习雅思听力中数字听写的交互式网页应用。
 
-[![访问量](https://profile-counter.glitch.me/cosing_IELTSlistennumber/count.svg)](https://github.com/your-username/your-repository-name) ---
+[![访问量](https://profile-counter.glitch.me/cosing_IELTSlistennumber/count.svg)](https://github.com/your-username/your-repository-name) 
 
 ## 📖 功能特性
 
@@ -40,7 +40,7 @@
 ## 🚀 如何使用
 
 1.  **下载或克隆代码**:
-      * 下载 ZIP 压缩文件并解压，或者使用 Git 命令 `git clone https://github.com/your-username/your-repository-name.git` 2.  **打开网页**:
+      * 下载 ZIP 压缩文件并解压，或者使用 Git 命令 `git clone` 2.  **打开网页**:
       * 在您的网页浏览器中直接打开 `index.html` 文件 (或者您命名的主HTML文件名)。
 2.  **开始练习**:
       * **选择模式**: 从下拉菜单中选择您想要练习的数字类型。
@@ -69,5 +69,5 @@
 
 ## 🤝 贡献代码
 
-欢迎通过提交 Pull Requests 或报告 Issues 的方式来改进本项目！您可以查看 [Issues 页面](https://github.com/your-username/your-repository-name/issues)。 
+欢迎通过提交 Pull Requests 或报告 Issues 的方式来改进本项目！您可以查看 [Issues 页面]。 
 
