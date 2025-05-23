@@ -10,7 +10,7 @@
 
   * **多种练习模式**:
       * 纯数字 (Digits)
-      * 数字 (0-200, e.g., 13, 30, 115)”（常规朗读）。
+      * 数字 (0-200, e.g., 13, 30, 115)”（常规朗读）
       * 货币 (Currency: £, €, sterling)
       * 面积 (Area: hectares, square meters)
       * 容积 (Liters)
