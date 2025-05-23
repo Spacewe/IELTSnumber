@@ -16,6 +16,7 @@ An interactive web application to help users practice number dictation for IELTS
 
   * **Multiple Practice Modes**:
       * Digits
+      * Numbers (0-200, e.g., 13, 30)
       * Currency (£, €, sterling)
       * Area (hectares, square meters)
       * Liters
