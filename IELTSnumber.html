@@ -82,7 +82,8 @@
                 <div>
                     <label for="mode-select" class="block text-sm font-medium text-slate-700 mb-1">Select Mode:</label>
                     <select id="mode-select" class="mt-1 block w-full py-2 px-3 border border-slate-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm">
-                        <option value="digits">Digits (e.g., 352, 9017)</option>
+                        <option value="digits_individual">Digits (Individual e.g., 3 5 2)</option>
+                        <option value="numbers_0_200">Numbers (0-200 e.g., 13, 30, 115)</option>
                         <option value="currency">Currency (e.g., £15.50, €20, 100 sterling)</option>
                         <option value="area">Area (e.g., 12.5 ha, 500 m²)</option>
                         <option value="liters">Liters (e.g., 3.75 L)</option>
@@ -95,7 +96,7 @@
                     </select>
                 </div>
 
-                <div id="digits-options" class="space-y-2"> <label for="digit-count" class="block text-sm font-medium text-slate-700 mb-1">Number of Digits:</label>
+                <div id="digits-options" class="space-y-2"> <label for="digit-count" class="block text-sm font-medium text-slate-700 mb-1">Number of Digits (for individual digit mode):</label>
                      <select id="digit-count" class="mt-1 block w-full py-2 px-3 border border-slate-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm">
                         <option value="3">3 digits</option>
                         <option value="4">4 digits</option>
@@ -181,8 +182,8 @@
                     <h4 class="font-semibold text-slate-800 mb-1">如何使用 (How to Use):</h4>
                     <p class="text-slate-600">
                         <strong>中文说明：</strong><br>
-                        1. <strong>选择模式：</strong> 从下拉菜单中选择您想练习的数字类型（如纯数字、货币、面积、升、电话号码、时间、年份、生日、邮编或混合模式）。<br>
-                        2. <strong>设置题目：</strong> 如果选择了“数字”模式，请选择数字的位数。然后设置本次练习的题目数量。<br>
+                        1. <strong>选择模式：</strong> 从下拉菜单中选择您想练习的数字类型（如逐位数字、0-200数字、货币、面积、升、电话号码、时间、年份、生日、邮编或混合模式）。<br>
+                        2. <strong>设置题目：</strong> 如果选择了“逐位数字”模式，请选择数字的位数。然后设置本次练习的题目数量。<br>
                         3. <strong>开始训练：</strong> 点击“开始训练”按钮。题目会逐一通过语音播报。<br>
                         4. <strong>调整语速：</strong> 在训练界面，您可以随时通过“Playback Speed”下拉菜单调整音频播放速度。<br>
                         5. <strong>输入答案：</strong> 在输入框中键入您听到的数字或字符。对于带有单位的题目，只需输入数字部分。生日模式请输入如 "18 March"。<br>
@@ -196,8 +197,8 @@
                 <section>
                     <p class="text-slate-600">
                         <strong>English Instructions:</strong><br>
-                        1. <strong>Select Mode:</strong> Choose the type of numbers you want to practice from the dropdown menu (e.g., Digits, Currency, Area, Liters, Phone Numbers, Time, Years, Birthdays, Postcodes, or Mixed Mode).<br>
-                        2. <strong>Set Questions:</strong> If "Digits" mode is selected, choose the number of digits. Then, set the total number of questions for this session.<br>
+                        1. <strong>Select Mode:</strong> Choose the type of numbers you want to practice from the dropdown menu (e.g., Digits (Individual), Numbers (0-200), Currency, Area, Liters, Phone Numbers, Time, Years, Birthdays, Postcodes, or Mixed Mode).<br>
+                        2. <strong>Set Questions:</strong> If "Digits (Individual)" mode is selected, choose the number of digits. Then, set the total number of questions for this session.<br>
                         3. <strong>Start Training:</strong> Click the "Start Training" button. Questions will be read out one by one.<br>
                         4. <strong>Adjust Speed:</strong> During training, you can adjust the audio playback speed at any time using the "Playback Speed" dropdown menu in the training interface.<br>
                         5. <strong>Enter Answer:</strong> Type the numbers or characters you hear into the input box. For questions with units, only enter the numerical value. For Birthdays, enter like "18 March".<br>
@@ -259,6 +260,8 @@
         let currentQuestionIndex = 0;
         let userAnswers = [];
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 
 
         function populateVoiceList() {
@@ -312,8 +315,8 @@
 
         // Event Listeners
         modeSelect.addEventListener('change', () => {
-            const isDigitsMode = modeSelect.value === 'digits';
-            digitsOptions.classList.toggle('hidden', !isDigitsMode);
+            const isDigitsIndividualMode = modeSelect.value === 'digits_individual';
+            digitsOptions.classList.toggle('hidden', !isDigitsIndividualMode);
         });
         modeSelect.dispatchEvent(new Event('change')); 
 
@@ -391,47 +394,68 @@
             }
         }
         
-        function getSpokenYear(year) {
-            const y = parseInt(year);
-            if (isNaN(y)) return year.toString(); // Should not happen if input is number
+        function getSpokenCardinalNumber(n) {
+            n = parseInt(n);
+            if (isNaN(n)) return "";
+            if (n === 0) return "zero"; // Or "oh" in some contexts, but "zero" for standalone.
 
-            if (y < 1000) { // e.g. 752 -> "seven hundred and fifty-two" or "seven fifty-two"
-                if (y % 100 === 0) return `${getSpokenNumber(Math.floor(y/100))} hundred`; // 700 -> "seven hundred"
-                const hundreds = Math.floor(y/100);
-                const remainder = y % 100;
-                let spoken = "";
-                if (hundreds > 0) spoken += `${getSpokenNumber(hundreds)} hundred and `;
-                spoken += getSpokenNumber(remainder);
-                return spoken;
-            } else if (y >= 1000 && y < 2000) { // e.g. 1984 -> "nineteen eighty-four"
-                const firstTwo = Math.floor(y / 100);
-                const lastTwo = y % 100;
-                if (lastTwo === 0) { // 1900 -> "nineteen hundred"
-                    return `${getSpokenNumber(firstTwo)} hundred`;
-                }
-                return `${getSpokenNumber(firstTwo)} ${getSpokenNumber(lastTwo)}`;
-            } else if (y >= 2000 && y < 2100) { // e.g. 2005 -> "two thousand and five", 2023 -> "twenty twenty-three" or "two thousand and twenty-three"
-                if (y % 100 === 0) return `${getSpokenNumber(Math.floor(y/1000))} thousand`; // 2000 -> "two thousand"
-                if (y % 100 < 10 && y % 100 !== 0) return `${getSpokenNumber(Math.floor(y/1000))} thousand and ${getSpokenNumber(y%100)}`; // 2005 -> "two thousand and five"
-                // For 2010-2099, can say "twenty ten" or "two thousand and ten"
-                // To keep it simple, let's do "two thousand and X" for 2001-2009, and "twenty XX" for 2010+
-                if (y > 2009) {
-                     return `${getSpokenNumber(Math.floor(y/100))} ${getSpokenNumber(y%100)}`; // "twenty twenty-three"
-                }
-                return `${getSpokenNumber(Math.floor(y/1000))} thousand and ${getSpokenNumber(y%100)}`;
+            let words = "";
+
+            if (n >= 100) {
+                words += ones[Math.floor(n / 100)] + " hundred";
+                n %= 100;
+                if (n > 0) words += " and ";
             }
-            return year.toString(); // Fallback for very old or future years not fitting common patterns
+
+            if (n >= 20) {
+                words += tens[Math.floor(n / 10)];
+                n %= 10;
+                if (n > 0) words += "-"; // e.g. twenty-three
+            }
+            
+            if (n > 0) {
+                 if (words.endsWith("-")) words += ones[n]; // After a ten like "twenty-"
+                 else words += ones[n]; // For numbers < 20 or the 'one' part of "hundred and one"
+            }
+            
+            return words.trim().replace(/-$/, ""); // Remove trailing hyphen if n was a multiple of 10 >= 20
         }
 
-        function getSpokenNumber(n) { // Helper for getSpokenYear, handles numbers up to 99
-            if (n < 0 || n > 99) return n.toString(); // Basic guard
-            const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-            const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 
-            if (n < 20) return ones[n];
-            const ten = Math.floor(n / 10);
-            const one = n % 10;
-            return tens[ten] + (one > 0 ? `-${ones[one]}` : ""); // e.g. "twenty-three"
+        function getSpokenYear(year) {
+            const y = parseInt(year);
+            if (isNaN(y)) return year.toString();
+
+            if (y < 100) return getSpokenCardinalNumber(y); // e.g. 52 -> fifty-two
+            if (y < 1000) { 
+                const hundreds = Math.floor(y/100);
+                const remainder = y % 100;
+                let spoken = getSpokenCardinalNumber(hundreds) + " hundred";
+                if (remainder > 0) {
+                    spoken += " and " + getSpokenCardinalNumber(remainder);
+                }
+                return spoken; // e.g. 752 -> "seven hundred and fifty-two"
+            } else if (y >= 1000 && y < 2000) { 
+                const firstTwo = Math.floor(y / 100);
+                const lastTwo = y % 100;
+                if (lastTwo === 0) { 
+                    return `${getSpokenCardinalNumber(firstTwo)} hundred`; // 1900 -> "nineteen hundred"
+                }
+                // e.g. 1984 -> "nineteen eighty-four"
+                return `${getSpokenCardinalNumber(firstTwo)} ${getSpokenCardinalNumber(lastTwo)}`; 
+            } else if (y >= 2000 && y < 2100) { 
+                if (y % 100 === 0) return `${getSpokenCardinalNumber(Math.floor(y/1000))} thousand`; // 2000 -> "two thousand"
+                if (y % 100 < 10 && y % 100 !== 0) return `${getSpokenCardinalNumber(Math.floor(y/1000))} thousand and ${getSpokenCardinalNumber(y%100)}`; // 2005 -> "two thousand and five"
+                
+                // For 2010-2099, common to say "twenty ten", "twenty twenty-three"
+                if (y >= 2010) {
+                     return `${getSpokenCardinalNumber(Math.floor(y/100))} ${getSpokenCardinalNumber(y%100)}`; 
+                }
+                // For 2001-2009, "two thousand and X" is more common
+                return `${getSpokenCardinalNumber(Math.floor(y/1000))} thousand and ${getSpokenCardinalNumber(y%100)}`;
+            }
+            // Fallback for years outside typical IELTS range, though unlikely needed
+            return year.toString().split('').map(digit => getSpokenCardinalNumber(parseInt(digit))).join(' '); 
         }
 
 
@@ -446,19 +470,19 @@
             const style = Math.random();
 
             if (style < 0.25) { 
-                let hourPart = hourFor12.toString();
+                let hourPart = getSpokenCardinalNumber(hourFor12);
                 let minutePart = m.toString().padStart(2, '0');
                 if (m === 0) minutePart = "o'clock";
-                else if (m < 10) minutePart = `oh ${m}`; 
-                else minutePart = m.toString(); 
+                else if (m < 10) minutePart = `oh ${getSpokenCardinalNumber(m)}`; 
+                else minutePart = getSpokenCardinalNumber(m); 
                 
                 let spoken = `${hourPart} ${minutePart}`;
                 if (minutePart !== "o'clock") spoken += ` ${ampm}`;
                 else if (h !==0 && h !== 12) spoken += ` ${ampm}`; 
                 return spoken;
             } else if (style < 0.5) { 
-                 let hourPart = hourFor12.toString();
-                 let minutePartSpoken = m.toString().padStart(2,'0').split('').map(d => getSpokenNumber(parseInt(d))).join(' '); 
+                 let hourPart = getSpokenCardinalNumber(hourFor12);
+                 let minutePartSpoken = m.toString().padStart(2,'0').split('').map(d => getSpokenCardinalNumber(parseInt(d))).join(' '); 
                  if (m === 0) minutePartSpoken = "o'clock";
 
                  let spoken = `${hourPart} ${minutePartSpoken}`;
@@ -466,13 +490,13 @@
                  else if (h !==0 && h !== 12) spoken += ` ${ampm}`;
                  return spoken;
             } else if (style < 0.75 || m === 0 || m === 15 || m === 30 || m === 45) { 
-                if (m === 0) return `${getSpokenNumber(hourFor12)} o'clock` + (h !==0 && h !== 12 ? ` ${ampm}` : "");
-                if (m === 15) return `quarter past ${getSpokenNumber(hourFor12)}` + ` ${ampm}`;
-                if (m === 30) return `half past ${getSpokenNumber(hourFor12)}` + ` ${ampm}`;
-                if (m === 45) return `quarter to ${getSpokenNumber((h + 1) % 12 || 12)}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`; 
+                if (m === 0) return `${getSpokenCardinalNumber(hourFor12)} o'clock` + (h !==0 && h !== 12 ? ` ${ampm}` : "");
+                if (m === 15) return `quarter past ${getSpokenCardinalNumber(hourFor12)}` + ` ${ampm}`;
+                if (m === 30) return `half past ${getSpokenCardinalNumber(hourFor12)}` + ` ${ampm}`;
+                if (m === 45) return `quarter to ${getSpokenCardinalNumber((h + 1) % 12 || 12)}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`; 
             } 
-            if (m < 30) return `${getSpokenNumber(m)} minutes past ${getSpokenNumber(hourFor12)}` + ` ${ampm}`;
-            return `${getSpokenNumber(60 - m)} minutes to ${getSpokenNumber((h + 1) % 12 || 12)}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`;
+            if (m < 30) return `${getSpokenCardinalNumber(m)} minutes past ${getSpokenCardinalNumber(hourFor12)}` + ` ${ampm}`;
+            return `${getSpokenCardinalNumber(60 - m)} minutes to ${getSpokenCardinalNumber((h + 1) % 12 || 12)}` + ` ${ampm === 'AM' && h === 11 ? 'PM' : ampm === 'PM' && h === 23 ? 'AM' : ampm}`;
         }
 
         function getRandomLetter() {
@@ -486,7 +510,7 @@
             const numTotalQuestions = parseInt(numQuestionsInput.value);
             const overallMode = modeSelect.value;
             
-            const availableModesForMixed = ['digits', 'currency', 'area', 'liters', 'phone', 'time', 'year', 'birthday', 'postcode'];
+            const availableModesForMixed = ['digits_individual', 'numbers_0_200', 'currency', 'area', 'liters', 'phone', 'time', 'year', 'birthday', 'postcode'];
 
             for (let i = 0; i < numTotalQuestions; i++) {
                 let currentMode = overallMode;
@@ -497,12 +521,12 @@
                 let question = { type: currentMode, textToSpeak: '', correctAnswer: '', unitPrefix: '', unitSuffix: '', prompt: '' };
                 let selectedDigitCount = parseInt(digitCountSelect.value); 
                 
-                if (currentMode === 'digits' && overallMode === 'mixed') { 
+                if (currentMode === 'digits_individual' && overallMode === 'mixed') { 
                     selectedDigitCount = Math.floor(Math.random() * (7 - 3 + 1)) + 3; 
                 }
 
                 switch (currentMode) {
-                    case 'digits':
+                    case 'digits_individual': // Existing mode for individual digits
                         const len = selectedDigitCount;
                         let numStr = '';
                         for (let j = 0; j < len; j++) {
@@ -510,7 +534,13 @@
                         }
                         question.textToSpeak = numStr.split('').map(digit => digit === '0' ? (Math.random() < 0.5 ? 'oh' : 'zero') : digit).join(' '); 
                         question.correctAnswer = numStr;
-                        question.prompt = `Enter the ${len}-digit number:`;
+                        question.prompt = `Enter the ${len}-digit number (spoken individually):`;
+                        break;
+                    case 'numbers_0_200': // New mode for numbers 0-200
+                        const randomNumber = Math.floor(Math.random() * 201); // 0 to 200
+                        question.correctAnswer = randomNumber.toString();
+                        question.textToSpeak = getSpokenCardinalNumber(randomNumber);
+                        question.prompt = 'Enter the number (0-200):';
                         break;
                     case 'currency':
                         const currencyTypeRand = Math.random();
@@ -522,27 +552,27 @@
                             question.prompt = 'Enter the amount in Pounds:';
                             if (amount.includes('.')) {
                                 const parts = amount.split('.');
-                                question.textToSpeak = `${parts[0]} pounds and ${parts[1]} pence`;
+                                question.textToSpeak = `${getSpokenCardinalNumber(parts[0])} pounds and ${getSpokenCardinalNumber(parts[1])} pence`;
                             } else {
-                                question.textToSpeak = `${amount} pounds`;
+                                question.textToSpeak = `${getSpokenCardinalNumber(amount)} pounds`;
                             }
                         } else if (currencyTypeRand < 0.9) { 
                             question.unitPrefix = '€';
                             question.prompt = 'Enter the amount in Euros:';
                              if (amount.includes('.')) {
                                 const parts = amount.split('.');
-                                question.textToSpeak = `${parts[0]} euros and ${parts[1]} cents`;
+                                question.textToSpeak = `${getSpokenCardinalNumber(parts[0])} euros and ${getSpokenCardinalNumber(parts[1])} cents`;
                             } else {
-                                question.textToSpeak = `${amount} euros`;
+                                question.textToSpeak = `${getSpokenCardinalNumber(amount)} euros`;
                             }
                         } else { 
                             question.unitPrefix = ''; 
                             question.prompt = 'Enter the amount in sterling:';
                              if (amount.includes('.')) {
                                 const parts = amount.split('.');
-                                question.textToSpeak = `${parts[0]} sterling and ${parts[1]} pence`;
+                                question.textToSpeak = `${getSpokenCardinalNumber(parts[0])} sterling and ${getSpokenCardinalNumber(parts[1])} pence`;
                             } else {
-                                question.textToSpeak = `${amount} sterling`;
+                                question.textToSpeak = `${getSpokenCardinalNumber(amount)} sterling`;
                             }
                         }
                         break;
@@ -550,13 +580,13 @@
                         const areaTypeRand = Math.random();
                         if (areaTypeRand < 0.5) { 
                             const hectares = (Math.random() * 100 + 0.5).toFixed(1);
-                            question.textToSpeak = `${hectares} hectares`;
+                            question.textToSpeak = `${hectares} hectares`; // Spoken as digits for decimals
                             question.correctAnswer = hectares;
                             question.unitSuffix = 'ha';
                             question.prompt = 'Enter the area in hectares:';
                         } else { 
                             const sqm = Math.floor(Math.random() * 5000 + 100);
-                            question.textToSpeak = `${sqm} square meters`;
+                            question.textToSpeak = `${getSpokenCardinalNumber(sqm)} square meters`;
                             question.correctAnswer = sqm.toString();
                             question.unitSuffix = 'm²';
                             question.prompt = 'Enter the area in square meters:';
@@ -564,7 +594,7 @@
                         break;
                     case 'liters':
                         const liters = (Math.random() * 20 + 0.25).toFixed(2);
-                        question.textToSpeak = `${liters} liters`;
+                        question.textToSpeak = `${liters} liters`; // Spoken as digits for decimals
                         question.correctAnswer = liters;
                         question.unitSuffix = 'L';
                         question.prompt = 'Enter the volume in liters:';
@@ -598,25 +628,25 @@
                         question.prompt = 'Enter the time (HH:MM):';
                         break;
                     case 'year':
-                        const randomYear = Math.floor(Math.random() * (2025 - 300 + 1)) + 300; // Range 300 to 2025
+                        const randomYear = Math.floor(Math.random() * (2025 - 300 + 1)) + 300; 
                         question.correctAnswer = randomYear.toString();
                         question.textToSpeak = getSpokenYear(randomYear);
                         question.prompt = 'Enter the year:';
                         break;
                     case 'birthday':
-                        const day = Math.floor(Math.random() * 28) + 1; // Keep it simple, avoid month length issues for now (1-28)
+                        const day = Math.floor(Math.random() * 28) + 1; 
                         const monthIndex = Math.floor(Math.random() * months.length);
                         const monthName = months[monthIndex];
                         const ordinalDay = day + getOrdinalSuffix(day);
                         
                         const spokenDateStyle = Math.random();
                         if (spokenDateStyle < 0.5) {
-                            question.textToSpeak = `the ${ordinalDay} of ${monthName}`;
+                            question.textToSpeak = `the ${getSpokenCardinalNumber(day)}${getOrdinalSuffix(day)} of ${monthName}`;
                         } else {
-                            question.textToSpeak = `${monthName} the ${ordinalDay}`;
+                            question.textToSpeak = `${monthName} the ${getSpokenCardinalNumber(day)}${getOrdinalSuffix(day)}`;
                         }
-                        question.correctAnswer = `${day} ${monthName}`; // e.g., "18 March"
-                        question.prompt = 'Enter the date (e.g., 5 June):';
+                        question.correctAnswer = `${day} ${monthName}`; 
+                        question.prompt = 'Enter the date (e.g., 5 June or 5th June):';
                         break;
                     case 'postcode':
                         const pc = `${getRandomLetter()}${getRandomLetter()}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${getRandomLetter()}${getRandomLetter()}`;
@@ -680,11 +710,9 @@
             resultsSection.classList.add('hidden');
             trainingSection.classList.remove('hidden');
             
-            if (modeSelect.value === 'mixed' && questions.length > 0) {
-                 digitsOptions.classList.toggle('hidden', questions[0].type !== 'digits');
-            } else {
-                 digitsOptions.classList.toggle('hidden', modeSelect.value !== 'digits');
-            }
+            const firstQuestionMode = (questions.length > 0) ? questions[0].type : modeSelect.value;
+            digitsOptions.classList.toggle('hidden', firstQuestionMode !== 'digits_individual');
+
 
             startSpinner.classList.add('hidden');
             startButton.disabled = false;
@@ -702,11 +730,9 @@
                 feedbackArea.textContent = '';
                 feedbackArea.className = 'feedback-message text-center text-lg font-medium mt-2 mb-4'; 
                 
-                if (modeSelect.value === 'mixed') {
-                    digitsOptions.classList.toggle('hidden', q.type !== 'digits');
-                } else { // For non-mixed modes, ensure it's correctly set based on the single mode
-                    digitsOptions.classList.toggle('hidden', modeSelect.value !== 'digits');
-                }
+                // Show/hide digit count options based on current question type in mixed mode, or selected mode
+                const currentDisplayMode = modeSelect.value === 'mixed' ? q.type : modeSelect.value;
+                digitsOptions.classList.toggle('hidden', currentDisplayMode !== 'digits_individual');
 
 
                 speakText(q.textToSpeak);
@@ -725,28 +751,31 @@
             normalized = normalized.toLowerCase();
 
             if (type === 'birthday') {
-                // Remove ordinal suffixes (st, nd, rd, th) and extra spaces
-                normalized = normalized.replace(/(st|nd|rd|th)\b/g, '');
+                normalized = normalized.replace(/(st|nd|rd|th)\b/g, ''); // Remove ordinal suffixes
                 normalized = normalized.replace(/\s+/g, ' '); // Consolidate multiple spaces
-                // Attempt to match "DD MonthName" or "MonthName DD"
                 const parts = normalized.split(' ');
-                let dayPart = "", monthPart = "";
+                let dayPart = "", monthPartNormalized = "";
 
                 if (parts.length === 2) {
-                    if (!isNaN(parseInt(parts[0])) && months.map(m=>m.toLowerCase()).includes(parts[1])) {
-                        dayPart = parseInt(parts[0]).toString();
-                        monthPart = months.find(m => m.toLowerCase() === parts[1]);
-                    } else if (months.map(m=>m.toLowerCase()).includes(parts[0]) && !isNaN(parseInt(parts[1]))) {
-                        dayPart = parseInt(parts[1]).toString();
-                        monthPart = months.find(m => m.toLowerCase() === parts[0]);
+                    const potentialDay = parseInt(parts[0]);
+                    const potentialMonth = parts[1];
+                    const potentialDay2 = parseInt(parts[1]);
+                    const potentialMonth2 = parts[0];
+
+                    if (!isNaN(potentialDay) && months.map(m=>m.toLowerCase()).includes(potentialMonth)) {
+                        dayPart = potentialDay.toString();
+                        monthPartNormalized = months.find(m => m.toLowerCase() === potentialMonth);
+                    } else if (months.map(m=>m.toLowerCase()).includes(potentialMonth2) && !isNaN(potentialDay2)) {
+                        dayPart = potentialDay2.toString();
+                        monthPartNormalized = months.find(m => m.toLowerCase() === potentialMonth2);
                     }
                 }
-                if (dayPart && monthPart) return `${dayPart} ${monthPart}`; // Standardized: "DD MonthName_Capitalized"
-                return normalized; // Fallback if parsing fails
+                if (dayPart && monthPartNormalized) return `${dayPart} ${monthPartNormalized}`; 
+                return normalized; // Fallback
             }
 
 
-            if (type === 'digits' || type === 'phone' || type === 'year') {
+            if (type === 'digits_individual' || type === 'numbers_0_200' || type === 'phone' || type === 'year') {
                 return normalized.replace(/\s/g, ''); 
             }
             if (type === 'currency' || type === 'area' || type === 'liters') {
@@ -771,11 +800,9 @@
             const userAnswerRaw = answerInput.value;
             const currentQuestion = questions[currentQuestionIndex];
             const userAnswerNormalized = normalizeAnswer(userAnswerRaw, currentQuestion.type);
-            // For birthday, the correct answer is already "DD MonthName", so direct comparison after normalizing user input.
             const correctAnswerNormalized = (currentQuestion.type === 'birthday') 
                                             ? currentQuestion.correctAnswer // Already in "DD MonthName" format
                                             : normalizeAnswer(currentQuestion.correctAnswer, currentQuestion.type);
-
 
             const isCorrect = userAnswerNormalized === correctAnswerNormalized;
 
@@ -821,7 +848,7 @@
                 if (ans.unitSuffix) displayCorrectAnswer = displayCorrectAnswer + " " + ans.unitSuffix;
 
                 detailDiv.innerHTML = `
-                    <p class="font-semibold text-sm text-slate-700">Question ${index + 1} (${ans.type})</p>
+                    <p class="font-semibold text-sm text-slate-700">Question ${index + 1} (${ans.type.replace('_', ' ')})</p>
                     <p class="text-xs text-slate-500 italic">Spoken: "${ans.questionText}"</p>
                     <p class="text-sm">Your answer: <span class="font-medium">${ans.userAnswer || "(empty)"}</span></p>
                     ${!ans.isCorrect ? `<p class="text-sm">Correct answer: <span class="font-medium text-green-700">${displayCorrectAnswer}</span></p>` : ''}
@@ -848,29 +875,32 @@
                     if (!errorsByType[ans.type]) errorsByType[ans.type] = [];
                     errorsByType[ans.type].push(ans);
                     
-                    if (['digits', 'phone', 'postcode', 'year'].includes(ans.type)) { 
+                    if (['digits_individual', 'numbers_0_200', 'phone', 'postcode', 'year'].includes(ans.type)) { 
                         for(let char of ans.correctAnswer.toUpperCase()) { 
                             if (!ans.userAnswer.toUpperCase().includes(char)) {
                                 incorrectDigitsOrChars.push(char);
                             }
                         }
                     } else if (ans.type === 'birthday') {
-                        // For birthdays, compare parts if incorrect
-                        const correctParts = ans.correctAnswer.split(' '); // "DD", "MonthName"
-                        const userParts = normalizeAnswer(ans.userAnswer, 'birthday').split(' ');
+                        const correctParts = ans.correctAnswer.split(' '); 
+                        const userNorm = normalizeAnswer(ans.userAnswer, 'birthday');
+                        const userParts = userNorm.split(' ');
+                        
+                        let errorDetail = "";
                         if (userParts.length === 2) {
-                            if(userParts[0] !== correctParts[0]) incorrectDigitsOrChars.push(`Day: ${correctParts[0]} (yours: ${userParts[0]})`);
-                            if(userParts[1] !== correctParts[1]) incorrectDigitsOrChars.push(`Month: ${correctParts[1]} (yours: ${userParts[1]})`);
+                            if(userParts[0] !== correctParts[0]) errorDetail += `Day: ${correctParts[0]} (yours: ${userParts[0] || 'N/A'}) `;
+                            if(userParts[1] !== correctParts[1]) errorDetail += `Month: ${correctParts[1]} (yours: ${userParts[1] || 'N/A'})`;
                         } else {
-                            incorrectDigitsOrChars.push(`Format error for: ${ans.correctAnswer}`);
+                            errorDetail = `Format error for: ${ans.correctAnswer}`;
                         }
+                        if(errorDetail) incorrectDigitsOrChars.push(errorDetail.trim());
                     }
                 }
             });
             
             analysisHtml += "<br><strong>Performance by Type:</strong><ul>";
             for (const type in questionsByType) {
-                const capType = type.charAt(0).toUpperCase() + type.slice(1);
+                const capType = type.replace('_', ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
                 analysisHtml += `<li>${capType}: ${questionsByType[type].correct}/${questionsByType[type].total} correct</li>`;
             }
             analysisHtml += "</ul>";
@@ -886,7 +916,7 @@
                     .map(([char, count]) => `${char}${count > 1 ? ` (x${count})` : ''}`);
 
                 if (sortedCommonlyMissedChars.length > 0) {
-                    analysisHtml += `<br><strong>Potentially difficult parts:</strong> ${sortedCommonlyMissedChars.join(', ')}. (Simple analysis)`;
+                    analysisHtml += `<br><strong>Potentially difficult parts:</strong> ${sortedCommonlyMissedChars.join('; ')}. (Simple analysis)`;
                 }
             }
             
